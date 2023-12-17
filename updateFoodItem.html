@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update food</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/updateFoodItem.css')}}"
+    />
+    <link rel="stylesheet" href="/static/icons/css/all.min.css" />
+    {%if status%}
+    <script>
+      window.close();
+    </script>
+    {%endif%}
+  </head>
+  <body>
+    {%if food%}
+    <div class="add_food_popup active">
+      <form
+        id="addFoodForm"
+        action="/updateFood"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="food_editor">
+          <div class="food_gird">
+            <div class="input_container">
+              <input type="number" name="fid" hidden value="{{food.fid}}" />
+              <input
+                type="text"
+                placeholder="Enter food name"
+                required
+                name="fname"
+                id="fname"
+                value="{{food.fname}}"
+              />
+            </div>
+
+            <div class="input_container">
+              <input
+                type="text"
+                placeholder="Enter food price"
+                required
+                name="fprice"
+                id="fprice"
+                value="{{food.fprice}}"
+              />
+            </div>
+            <div class="input_container">
+              <select name="fcat" id="fcat" required>
+                <option>Select</option>
+                {%for i in opt%} {%if i == food.fcategory%}
+                <option value="{{i}}" selected>{{i}}</option>
+                {%else%}
+                <option value="{{i}}">{{i}}</option>
+                {%endif%} {%endfor%}
+              </select>
+            </div>
+            <div class="input_container">
+              <div class="image_">
+                <img
+                  id="image_preview"
+                  src="{{food.path}}"
+                  alt="Image Preview"
+                  style="border: 2px solid var(--active-blue-)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="edit_food_btns">
+            <button class="buttons add_itm" type="submit">Add item</button>
+            <div class="optional">
+              <label for="image-input"> Photo (Optional) </label>
+              <input
+                accept="image/*"
+                type="file"
+                id="image-input"
+                name="fimg"
+                hidden
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    {%endif%}
+    <script>
+      // ::Image preview before uploading start::
+      let imageInput = document.getElementById("image-input"),
+        imagePreview = document.getElementById("image_preview"),
+        hideSpan = document.querySelector(".hide");
+
+      imageInput.addEventListener("change", function () {
+        const file = imageInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = "block";
+            imagePreview.style.border = "2px solid var(--active-blue-)";
+            hideSpan.style.display = "none";
+          };
+
+          reader.readAsDataURL(file);
+        } else {
+          imagePreview.src = "";
+          imagePreview.style.display = "none";
+          hideSpan.style.display = "block";
+        }
+      });
+      // ::Image preview before uploading end::
+    </script>
+  </body>
+</html>

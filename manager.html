@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manager</title>
+    <link rel="stylesheet" href="./css/manager.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="fas fa-bars"></div>
+      <div class="logo">
+        <img src="./images/logo.png" alt="RestoReady" />
+      </div>
+      <div class="serachbar">
+        <input type="text" placeholder="Search" />
+        <i class="fas fa-search"></i>
+      </div>
+      <div class="manager_account">
+        <i class="fas fa-user-circle"></i>
+      </div>
+    </div>
+
+    <div class="manager_action">
+      <p>Manager</p>
+      <a class="logout" href="/logout">Logout</a>
+    </div>
+
+    <div class="side_navbar">
+      <ul>
+        <li class="active_tab" onclick="displayPage('orders','pages')">
+          <i class="far fa-clipboard"></i>
+          <span>Orders</span>
+        </li>
+        <li onclick="displayPage('stock','pages')" class="">
+          <i class="fas fa-burger"></i>
+          <span>Food Stock</span>
+        </li>
+        <li onclick="displayPage('tables','pages')" class="">
+          <i class="fas fa-chair"></i>
+          <span>Tables</span>
+        </li>
+        <li onclick="displayPage('billing','pages')" class="">
+          <i class="fas fa-indian-rupee-sign"></i>
+          <span>Billing</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="main_content">
+      <div class="pages" id="orders" style="display: block">
+        <div class="options opt">
+          <button
+            class="btns active_btn"
+            onclick="displayPage('all_option','sub_order_page')"
+          >
+            All
+          </button>
+        </div>
+
+        <div class="category">
+          <div class="sub_order_page" id="all_option">
+            <div class="common_container">
+              <div class="order_card">
+                <div class="order_table">
+                  <div class="time ttd">
+                    <i class="far fa-clock"></i>
+                    <span>09:59:25</span>
+                  </div>
+                  <div class="tableNo ttd">
+                    <span>Table T5</span>
+                  </div>
+                  <div class="date ttd">
+                    <i class="fas fa-location"></i>
+                    <span>17-12-2023</span>
+                  </div>
+                </div>
+                <div class="order_label">
+                  <span>Items</span>
+                  <span>Quantity</span>
+                </div>
+                <ul class="order_info">
+                  <li>
+                    <span>Vadapav</span>
+                    <span>2</span>
+                  </li>
+                  <li>
+                    <span>Roti</span>
+                    <span>3</span>
+                  </li>
+                  <li>
+                    <span>Tea</span>
+                    <span>2</span>
+                  </li>
+                </ul>
+                <div class="order_actions">
+                  <button class="delete bttn" data-tid="T5">Delete</button>
+                  <button class="approve bttn" data-tid="T5">Approve</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pages" id="stock" style="display: none">
+        <div class="options stk">
+          <button
+            class="btns active_btn"
+            onclick="displayPage('all_food','sub_food_page')"
+          >
+            All
+          </button>
+          <button
+            class="btns"
+            onclick="displayPage('breakfast','sub_food_page')"
+          >
+            Breakfast
+          </button>
+          <button class="btns" onclick="displayPage('dessert','sub_food_page')">
+            Dessert
+          </button>
+          <button
+            class="btns"
+            onclick="displayPage('lunch_dinner','sub_food_page')"
+          >
+            Lunch/Dinner
+          </button>
+          <button class="btns" onclick="displayPage('snacks','sub_food_page')">
+            Snacks
+          </button>
+          <button class="btns add_item">Add</button>
+        </div>
+
+        <div class="category">
+          <div class="sub_food_page" id="all_food">
+            <div class="common_container">
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Samosa</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/samosa.png" alt="Samosa" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/38" target="_blank" data-fid="38"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Chicken Tandoori</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/chicken_tandoori.png"
+                    alt="Chicken Tandoori"
+                  />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/39" target="_blank" data-fid="39"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Roti</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/roti.png" alt="Roti" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/40" target="_blank" data-fid="40"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Tea</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/tea.png" alt="Tea" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/41" target="_blank" data-fid="41"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Ice-cream </span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/ice-cream.png" alt="Ice-cream " />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/42" target="_blank" data-fid="42"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Cheetos</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/cheetos.png" alt="Cheetos" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/43" target="_blank" data-fid="43"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Vadapav</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/vadapav.png" alt="Vadapav" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/44" target="_blank" data-fid="44"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Burgur</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/vecteezy_beef-burger-cutout_23522925_991.png"
+                    alt="Burgur"
+                  />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/45" target="_blank" data-fid="45"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Salmon</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/chease_vadapav.png" alt="Salmon" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/46" target="_blank" data-fid="46"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Pizza</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/thinly-sliced-pepperoni-is-popular-pizza-topping-american-style-pizzerias-isolated-white-background-still-life.jpg"
+                    alt="Pizza"
+                  />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/48" target="_blank" data-fid="48"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sub_food_page" id="breakfast">
+            <div class="common_container">
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Roti</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/roti.png" alt="Roti" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/40" target="_blank" data-fid="40"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Tea</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/tea.png" alt="Tea" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/41" target="_blank" data-fid="41"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Vadapav</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/vadapav.png" alt="Vadapav" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/44" target="_blank" data-fid="44"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sub_food_page" id="dessert">
+            <div class="common_container">
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Ice-cream </span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/ice-cream.png" alt="Ice-cream " />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/42" target="_blank" data-fid="42"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sub_food_page" id="lunch_dinner">
+            <div class="common_container">
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Samosa</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/samosa.png" alt="Samosa" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/38" target="_blank" data-fid="38"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Chicken Tandoori</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/chicken_tandoori.png"
+                    alt="Chicken Tandoori"
+                  />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/39" target="_blank" data-fid="39"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Salmon</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/chease_vadapav.png" alt="Salmon" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/46" target="_blank" data-fid="46"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sub_food_page" id="snacks">
+            <div class="common_container">
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Cheetos</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/cheetos.png" alt="Cheetos" />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/43" target="_blank" data-fid="43"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Burgur</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/vecteezy_beef-burger-cutout_23522925_991.png"
+                    alt="Burgur"
+                  />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/45" target="_blank" data-fid="45"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Pizza</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/thinly-sliced-pepperoni-is-popular-pizza-topping-american-style-pizzerias-isolated-white-background-still-life.jpg"
+                    alt="Pizza"
+                  />
+                </div>
+                <div class="food_action">
+                  <i class="fas fa-pencil-square"></i>
+                  <a href="/updateFoodItem/48" target="_blank" data-fid="48"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pages" id="tables" style="display: none">
+        <div class="options tbls">
+          <button
+            class="btns active_btn"
+            onclick="displayPage('all_tables','sub_table_page')"
+          >
+            All
+          </button>
+          <button
+            class="btns"
+            onclick="displayPage('booked_tables','sub_table_page')"
+          >
+            Booked
+          </button>
+          <button
+            class="btns"
+            onclick="displayPage('empty_tables','sub_table_page')"
+          >
+            Empty
+          </button>
+        </div>
+        <div class="category">
+          <div class="sub_table_page" id="all_tables">
+            <div class="common_container">
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T1</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top booked"></div>
+                  <div class="bottom booked"></div>
+                  <div class="left booked"></div>
+                  <div class="right booked"></div>
+                  <div class="center booked">
+                    <span>Table T2</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span
+                    >Order served <br />
+                    Payment pending</span
+                  >
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T3</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T4</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top booked"></div>
+                  <div class="bottom booked"></div>
+                  <div class="left booked"></div>
+                  <div class="right booked"></div>
+                  <div class="center booked">
+                    <span>Table T5</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Reserved</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T6</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T7</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T8</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T9</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T10</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T11</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T12</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T13</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T14</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T15</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sub_table_page" id="booked_tables">
+            <div class="common_container">
+              <div class="table_card">
+                <div class="table">
+                  <div class="top booked"></div>
+                  <div class="bottom booked"></div>
+                  <div class="left booked"></div>
+                  <div class="right booked"></div>
+                  <div class="center booked">
+                    <span>Table T2</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span
+                    >Order served <br />
+                    Payment pending</span
+                  >
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top booked"></div>
+                  <div class="bottom booked"></div>
+                  <div class="left booked"></div>
+                  <div class="right booked"></div>
+                  <div class="center booked">
+                    <span>Table T5</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Reserved</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sub_table_page" id="empty_tables">
+            <div class="common_container">
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T1</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T3</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T4</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T6</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T7</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T8</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T9</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T10</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T11</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T12</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T13</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T14</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+              <div class="table_card">
+                <div class="table">
+                  <div class="top unbooked"></div>
+                  <div class="bottom unbooked"></div>
+                  <div class="left unbooked"></div>
+                  <div class="right unbooked"></div>
+                  <div class="center unbooked">
+                    <span>Table T15</span>
+                  </div>
+                </div>
+                <div class="table_status">
+                  <span>Empty</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pages" id="billing" style="display: none">
+        <div class="common_container">
+          <div class="order_card">
+            <div class="order_table">
+              <div class="time ttd">
+                <i class="far fa-clock"></i>
+                <span>10:43:32</span>
+              </div>
+              <div class="tableNo ttd">
+                <span>Table T2</span>
+              </div>
+              <div class="date ttd">
+                <i class="fas fa-location"></i>
+                <span>29-11-2023</span>
+              </div>
+            </div>
+            <div class="order_label">
+              <span>Items</span>
+              <span>Quantity</span>
+              <span>Total</span>
+            </div>
+            <ul class="order_info">
+              <li>
+                <span>Tea</span>
+                <span>2</span>
+                <span>20</span>
+              </li>
+              <li>
+                <span>Vadapav</span>
+                <span>3</span>
+                <span>30</span>
+              </li>
+            </ul>
+            <div class="order_actions">
+              <button class="approve generatebill bttn" data-tid="T2">
+                Generate Bill
+              </button>
+              <span>Total Price <br />50 Rs/-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="add_food_popup">
+      <form
+        id="addFoodForm"
+        action="/addItem"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="food_editor">
+          <i class="fas fa-x cancle"></i>
+          <div class="food_gird">
+            <div class="input_container">
+              <input
+                type="text"
+                placeholder="Enter food name"
+                required=""
+                name="fname"
+                id="fname"
+              />
+            </div>
+
+            <div class="input_container">
+              <input
+                type="text"
+                placeholder="Enter food price"
+                required=""
+                name="fprice"
+                id="fprice"
+              />
+            </div>
+            <div class="input_container">
+              <select name="fcat" id="fcat" required="">
+                <option>Select</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Lunch / Dinner">Lunch / Dinner</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Snacks">Snacks</option>
+              </select>
+            </div>
+            <div class="input_container">
+              <label for="image-input">
+                <span class="hide">Select a pic</span>
+                <img id="image_preview" src="" alt="Image Preview" />
+              </label>
+              <input
+                accept="image/*"
+                type="file"
+                id="image-input"
+                placeholder="Enter food name"
+                name="fimg"
+              />
+            </div>
+          </div>
+          <div class="edit_food_btns">
+            <button class="buttons add_itm" type="submit">Add item</button>
+            <button class="buttons cancle_btn" type="reset">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="copyright" style="text-align: center">
+      &#169; 2021 Restoready. Developed By Padam and Pranit. All rights
+      reserved.
+    </div>
+    <script src="./js/manager.js"></script>
+    <script src="./js/common_functions.js"></script>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body>
+    <div class="add_employee_">
+      <form>
+        <div class="employee_editor">
+          <div class="input_box">
+            <div class="inputs">
+              <input type="text" name="firstname" required />
+              <label class="input_title">First name</label>
+            </div>
+            <div class="inputs">
+              <input type="text" name="lastname" required />
+              <label class="input_title">Last name</label>
+            </div>
+          </div>
+          <div class="input_box">
+            <div class="inputs">
+              <input type="text" name="email" required />
+              <label class="input_title">Email</label>
+            </div>
+            <div class="inputs">
+              <input type="text" name="mobile" required />
+              <label class="input_title">Mobile no</label>
+            </div>
+          </div>
+          <div class="input_box">
+            <div class="inputs">
+              <select name="role" required>
+                <option value=""></option>
+                <option value="Manager">Manager</option>
+                <option value="Chief">Chief</option>
+                <option value="Waiters">Waiters</option>
+                <option value="Workers">Workers</option>
+                <option value="Admin">Admin</option>
+              </select>
+              <label class="input_title">Select employee role</label>
+            </div>
+            <div class="inputs">
+              <span id="for">Add login page for</span>
+              <input type="checkbox" id="addLogin" name="addLogin" />
+            </div>
+          </div>
+          <div class="select_box">
+            <div class="input_box">
+              <div class="inputs">
+                <input type="text" name="username" />
+                <label class="input_title">Username</label>
+              </div>
+              <div class="inputs">
+                <input type="text" name="password" />
+                <label class="input_title">Password</label>
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            <button type="submit">Add employee</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      let addLogin = document.getElementById("addLogin"),
+        select_box = document.querySelector(".select_box");
+
+      let username = document.querySelector('input[name="username"]');
+      let password = document.querySelector('input[name="password"]');
+      let firstname = document.querySelector('input[name="firstname"]');
+
+      addLogin.addEventListener("input", (e) => {
+        if (addLogin.checked) {
+          select_box.style.display = "block";
+          if (firstname.value != "") {
+            username.setAttribute("required", "required");
+            password.setAttribute("required", "required");
+            username.value = password.value =
+              firstname.value.toLowerCase() + parseInt(Math.random() * 100);
+          }
+        } else {
+          select_box.style.display = "none";
+          username.value = password.value = "";
+        }
+      });
+
+      let forr = document.getElementById("for");
+      let select = document.querySelector('select[name="role"]');
+
+      select.addEventListener("input", () => {
+        forr.textContent = `Add login page for ${select.value}`;
+      });
+    </script>
+  </body>
+</html>

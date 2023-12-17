@@ -1,0 +1,139 @@
+/* Default options start */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  outline: none;
+}
+
+:root {
+  --light-white-color-: #f2f4f5;
+  --border-color-: #ccc;
+  --light-orange-color-: #ffb660;
+  --icons-size-: 30px;
+  --center-position-: translate(-50%, -50%);
+  --active-blue-: #87d1ff;
+  --active-btn-: #00ff8a;
+  --delete-btn-: #dc3545;
+}
+/* Default options end */
+
+/* ::Add food popup start:: */
+.add_food_popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.add_food_popup.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.food_editor {
+  width: auto;
+  height: auto;
+  background: var(--light-white-color-);
+  border-radius: 20px;
+  position: relative;
+}
+
+.food_gird {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 400px 250px;
+  grid-template-rows: repeat(3, 70px);
+  gap: 20px;
+}
+
+.input_container input,
+.input_container select {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  padding: 0 10px 0 20px;
+  font-size: 17px;
+}
+.input_container input::placeholder {
+  color: #000;
+}
+.input_container input:is(:focus, :valid),
+.input_container select:is(:focus, :valid) {
+  border: 2px solid var(--active-blue-);
+}
+.input_container:last-child {
+  grid-row: 1/4;
+  grid-column: 2/3;
+}
+.input_container:last-child input {
+  display: none;
+}
+.input_container label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#image_preview {
+  width: 100%;
+  height: 100%;
+  display: none;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.edit_food_btns {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.buttons {
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.cancle {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  background: #dddddd;
+  padding: 20px 23px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.cancle_btn {
+  display: none;
+}
+.cancle:hover {
+  background: #c5c2c2;
+}
+.add_itm {
+  background: var(--active-btn-);
+  color: #fff;
+}
+.add_itm:hover {
+  background: #0ad978;
+}
+/* ::Add food popup end:: */

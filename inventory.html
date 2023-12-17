@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory</title>
+    <link rel="stylesheet" href="./css/inventory.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="add_food_popup active">
+      <form id="addFoodForm" enctype="multipart/form-data">
+        <div class="food_editor">
+          <div class="food_gird">
+            <div class="input_container">
+              <input
+                type="text"
+                placeholder="Enter item name"
+                required
+                name="ingredent"
+                id="ingredent"
+              />
+            </div>
+
+            <div class="input_container">
+              <input
+                type="text"
+                placeholder="Enter quantity"
+                required
+                name="quantity"
+                id="quantity"
+              />
+            </div>
+            <div class="input_container">
+              <div class="edit_food_btns">
+                <button class="buttons add_itm" type="submit">Add item</button>
+                <button class="buttons cancle_btn" type="reset">Cancel</button>
+              </div>
+            </div>
+            <div class="input_container">
+              <label for="image-input">
+                <span class="hide">Select a pic</span>
+                <img id="image_preview" src="" alt="Image Preview" />
+              </label>
+              <input
+                accept="image/*"
+                type="file"
+                id="image-input"
+                placeholder="Enter food name"
+                name="image"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div
+      class="copyright"
+      style="
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        position: absolute;
+        bottom: 0;
+      "
+    >
+      &#169; 2021 Restoready. Developed By Padam and Pranit. All rights
+      reserved.
+    </div>
+    <script>
+      let imageInput = document.getElementById("image-input"),
+        imagePreview = document.getElementById("image_preview"),
+        hideSpan = document.querySelector(".hide");
+
+      imageInput.addEventListener("change", function () {
+        const file = imageInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = "block";
+            imagePreview.style.border = "2px solid var(--active-blue-)";
+            hideSpan.style.display = "none";
+          };
+
+          reader.readAsDataURL(file);
+        } else {
+          imagePreview.src = "";
+          imagePreview.style.display = "none";
+          hideSpan.style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>

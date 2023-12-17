@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chief</title>
+    <link rel="stylesheet" href="./css/chief.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo">
+        <img src="./images/logo.png" data-logo="false" />
+      </div>
+      <ul class="nav-items">
+        <li class="active-tab" onclick="displayPage('orderPage','pages')">
+          <i class="far fa-clipboard"></i>
+          <span>Orders</span>
+        </li>
+        <li onclick="displayPage('foodpage','pages')">
+          <i class="fas fa-burger"></i>
+          <span>Food</span>
+        </li>
+        <li onclick="displayPage('inventory','pages')">
+          <i class="fas fa-book"></i>
+          <span>Inventory</span>
+        </li>
+      </ul>
+
+      <i class="fas fa-arrow-left"></i>
+    </div>
+    <div class="main-content">
+      <div class="pages" id="orderPage">
+        <div class="category">
+          <div class="chief-order-page" id="newOrders">
+            <div class="commonContainer">
+              <div class="order_card" data-tableno="T5">
+                <div class="order_table">
+                  <div class="time ttd">
+                    <i class="far fa-clock"></i>
+                    <span>10:08:18</span>
+                  </div>
+                  <div class="tableNo ttd">
+                    <span>Table T5</span>
+                  </div>
+                  <div class="date ttd">
+                    <i class="fas fa-location"></i>
+                    <span>17-12-2023</span>
+                  </div>
+                </div>
+                <div class="order_label">
+                  <span>Items</span>
+                  <span>Quantity</span>
+                </div>
+                <ul class="order_info">
+                  <li>
+                    <span>Tea</span>
+                    <span>2</span>
+                  </li>
+
+                  <li>
+                    <span>Vadapav</span>
+                    <span>2</span>
+                  </li>
+
+                  <li>
+                    <span>Roti</span>
+                    <span>3</span>
+                  </li>
+                </ul>
+                <div class="order_actions">
+                  <button class="approve completed bttn" data-tableno="T5">
+                    Order Completed
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pages" id="foodpage">
+        <div class="options men">
+          <button
+            class="btns active-btn"
+            onclick="displayPage('allFoodItems','chief-menu-page')"
+          >
+            All
+          </button>
+          <button
+            class="btns"
+            onclick="displayPage('breakfastItems','chief-menu-page')"
+          >
+            Breakfast
+          </button>
+          <button
+            class="btns"
+            onclick="displayPage('lunchItems','chief-menu-page')"
+          >
+            Lunch<span style="color: transparent">p</span>/<span
+              style="color: transparent"
+              >p</span
+            >Dinner
+          </button>
+          <button
+            class="btns"
+            onclick="displayPage('dessertItems','chief-menu-page')"
+          >
+            Dessert
+          </button>
+          <button
+            class="btns"
+            onclick="displayPage('snacksItems','chief-menu-page')"
+          >
+            Snacks
+          </button>
+        </div>
+        <div class="category">
+          <div class="chief-menu-page" id="allFoodItems">
+            <div class="common_container">
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Samosa</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/samosa.png" alt="Samosa" />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Chicken Tandoori</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/chicken_tandoori.png"
+                    alt="Chicken Tandoori"
+                  />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Roti</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/roti.png" alt="Roti" />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Tea</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/tea.png" alt="Tea" />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Ice-cream </span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/ice-cream.png" alt="Ice-cream " />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Cheetos</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/cheetos.png" alt="Cheetos" />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Vadapav</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/vadapav.png" alt="Vadapav" />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Burgur</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/vecteezy_beef-burger-cutout_23522925_991.png"
+                    alt="Burgur"
+                  />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Salmon</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/chease_vadapav.png" alt="Salmon" />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Pizza</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/thinly-sliced-pepperoni-is-popular-pizza-topping-american-style-pizzerias-isolated-white-background-still-life.jpg"
+                    alt="Pizza"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chief-menu-page" id="breakfastItems">
+            <div class="common_container">
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Roti</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/roti.png" alt="Roti" />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Tea</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/tea.png" alt="Tea" />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Vadapav</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/vadapav.png" alt="Vadapav" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chief-menu-page" id="lunchItems">
+            <div class="common_container">
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Samosa</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/samosa.png" alt="Samosa" />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Chicken Tandoori</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/chicken_tandoori.png"
+                    alt="Chicken Tandoori"
+                  />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Salmon</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/chease_vadapav.png" alt="Salmon" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chief-menu-page" id="dessertItems">
+            <div class="common_container">
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Ice-cream </span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/ice-cream.png" alt="Ice-cream " />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chief-menu-page" id="snacksItems">
+            <div class="common_container">
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Cheetos</span>
+                </div>
+                <div class="food_image">
+                  <img src="./uploads/cheetos.png" alt="Cheetos" />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Burgur</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/vecteezy_beef-burger-cutout_23522925_991.png"
+                    alt="Burgur"
+                  />
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Pizza</span>
+                </div>
+                <div class="food_image">
+                  <img
+                    src="./uploads/thinly-sliced-pepperoni-is-popular-pizza-topping-american-style-pizzerias-isolated-white-background-still-life.jpg"
+                    alt="Pizza"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pages" id="inventory">
+        <div class="options">
+          <button class="btns active-btn">
+            <a href="./inventory.html" target="_blank">Add Items</a>
+          </button>
+        </div>
+        <div class="category">
+          <div class="inventory_page">
+            <div class="common_container" id="inventory_list">
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Breads</span>
+                </div>
+                <div class="food_image">
+                  <img src="/inventory/breads.png" alt="Breads" />
+                </div>
+                <div class="food_stock">
+                  <span>25 / 200</span>
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Onion</span>
+                </div>
+                <div class="food_image">
+                  <img src="/inventory/onion.png" alt="Onion" />
+                </div>
+                <div class="food_stock">
+                  <span>50 / 200</span>
+                </div>
+              </div>
+              <div class="food_card">
+                <div class="food_name">
+                  <span>Tomato </span>
+                </div>
+                <div class="food_image">
+                  <img src="/inventory/tomato.png" alt="Tomato " />
+                </div>
+                <div class="food_stock">
+                  <span>20 / 200</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pages" id="userPage">user</div>
+    </div>
+    <div class="copyright" style="text-align: center">
+      &#169; 2021 Restoready. Developed By Padam and Pranit. All rights
+      reserved.
+    </div>
+    <script src="./js/chief.js"></script>
+    <script src="./js/common_functions.js"></script>
+  </body>
+</html>

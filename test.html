@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download Reports</title>
+    <script src="/static/js/html2pdf.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='icons/css/all.min.css')}}"
+    />
+    <script src="{{url_for('static',filename='js/socket.io.js')}}"></script>
+    <script src="{{url_for('static',filename='js/chart.umd.min.js')}}"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+        outline: none;
+      }
+
+      :root {
+        --light-white-color-: #f2f4f5;
+        --border-color-: #ccc;
+        --grey-color-: #e2e2e2;
+        --light-orange-color-: #ffb660;
+        --icons-size-: 30px;
+        --center-position-: translate(-50%, -50%);
+        --active-blue-: #87d1ff;
+        --active-btn-: #00ff8a;
+        --delete-btn-: #dc3545;
+      }
+      .div {
+        margin-left: 15px;
+        margin-top: 15px;
+        width: 1050px;
+        /* border: 1px solid red; */
+      }
+      .div h2 {
+        text-align: center;
+      }
+      .summary {
+        margin-top: 30px;
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+        padding: 0 4%;
+      }
+      .totals {
+        padding: 15px;
+        width: 200px;
+        height: auto;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 0 3px 0.3px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .totals i {
+        font-size: 4rem;
+      }
+      .totals:nth-child(1) {
+        border: 1px solid red;
+      }
+      .totals:nth-child(2) {
+        border: 1px solid var(--active-blue-);
+      }
+      .totals:nth-child(3) {
+        border: 1px solid var(--active-btn-);
+      }
+      .totals:nth-child(4) {
+        border: 1px solid deeppink;
+      }
+      .totals:nth-child(5) {
+        border: 1px solid;
+      }
+      .totals:nth-child(1) i {
+        color: red;
+      }
+      .totals:nth-child(2) i {
+        color: var(--active-blue-);
+      }
+      .totals:nth-child(3) i {
+        color: var(--active-btn-);
+      }
+      .totals:nth-child(4) i {
+        color: deeppink;
+      }
+      .total_info {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .total_info h1 {
+        font-size: 20px;
+      }
+      .total_info span {
+        font-size: 18px;
+        font-weight: bold;
+        color: grey;
+      }
+      .pages {
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+        /* overflow: hidden; */
+        /* background: #f2edf3; */
+        background: #fff;
+      }
+      .orderPage {
+        padding: 0 100px;
+        margin-top: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+      }
+      #heading {
+        text-align: center;
+      }
+      .suborder {
+        padding: 10px;
+        margin-top: 30px;
+        width: 250px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 5px 0.3px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+      }
+      .suborder i {
+        font-size: 3rem;
+      }
+      .suborder:nth-child(2) i {
+        color: red;
+      }
+      .suborder:nth-child(3) i {
+        color: var(--active-blue-);
+      }
+      .suborder:nth-child(4) i {
+        color: var(--active-btn-);
+      }
+      .suborder span {
+        margin-top: 10px;
+        font-size: 18px;
+        color: grey;
+        font-weight: bold;
+      }
+      /* .suborder h2 {
+
+      /* Orders end */
+      .charts {
+        /* margin-top: 40px; */
+        width: 100%;
+        padding: 20px;
+        position: relative;
+      }
+
+      .bar_container {
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        /* flex-wrap: wrap; */
+        gap: 10px;
+      }
+      .bar {
+        margin-top: 20px;
+        flex-basis: 50%;
+        height: 300px;
+        box-shadow: 0 0 5px 0.3px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      .bar h1 {
+        text-align: center;
+      }
+      .charts input {
+        margin-left: 20px;
+        width: 150px;
+        height: 35px;
+        border-radius: 10px;
+        border: 1px solid var(--border-color-);
+        padding: 0 10px;
+        cursor: pointer;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      thead th {
+        background: #000;
+        color: #fff;
+        position: sticky;
+        top: 0;
+        padding: 20px 35px;
+        z-index: 1;
+      }
+      thead tr th:first-child {
+        border-top-left-radius: 10px;
+      }
+      thead tr th:last-child {
+        border-top-right-radius: 10px;
+      }
+      thead tr th:not(:last-child)::after {
+        position: absolute;
+        content: "";
+        top: 10%;
+        bottom: 10%;
+        right: 0;
+        border-right: 1px solid #fff;
+      }
+      tbody tr {
+        text-align: center;
+      }
+      tr.admin {
+        border: 2px solid gold !important;
+      }
+      tbody tr:nth-of-type(even) {
+        background: #f2f4f5;
+      }
+      tbody td {
+        position: relative;
+        padding: 15px;
+      }
+      tbody tr:hover {
+        background: #c2c2c2;
+      }
+      tbody td:not(:last-child)::after {
+        position: absolute;
+        content: "";
+        top: 10%;
+        bottom: 10%;
+        right: 0;
+        border-right: 1px solid var(--border-color-);
+      }
+      tbody tr:last-child {
+        border-bottom: 1px solid var(--border-color-);
+      }
+      td a {
+        text-decoration: none;
+        color: var(--active-blue-);
+        font-weight: bold;
+      }
+      :is(td a:hover, td span:hover) {
+        text-decoration: underline;
+      }
+
+      td span {
+        color: var(--delete-btn-);
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .info {
+        margin-top: 30px;
+        width: 100%;
+      }
+      .info h2 {
+        margin-bottom: 20px;
+      }
+      .cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        z-index: 10;
+        font-size: 2rem;
+      }
+      .cover i {
+        font-size: 3rem;
+        margin-left: 20px;
+      }
+      body {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cover">
+      <h1>please wait</h1>
+      <i class="fas fa-spinner fa-spin fa-pulse"></i>
+    </div>
+    <div class="div" id="pdf-content">
+      <h1 style="text-align: center; margin-top: 20px">Employees</h1>
+      <div class="summary">
+        <div class="totals">
+          <i class="fas fa-user"></i>
+          <div class="total_info">
+            <span id="t_manager"></span>
+            <h1>Managers</h1>
+          </div>
+        </div>
+        <div class="totals">
+          <i class="fas fa-user"></i>
+          <div class="total_info">
+            <span id="t_chief"></span>
+            <h1>Chiefs</h1>
+          </div>
+        </div>
+        <div class="totals">
+          <i class="fas fa-user"></i>
+          <div class="total_info">
+            <span id="t_waiters"></span>
+            <h1>Waiters</h1>
+          </div>
+        </div>
+        <div class="totals">
+          <i class="fas fa-user"></i>
+          <div class="total_info">
+            <span id="t_workers"></span>
+            <h1>Workers</h1>
+          </div>
+        </div>
+        <div class="totals">
+          <i class="fas fa-user"></i>
+          <div class="total_info">
+            <span id="t_admins"></span>
+            <h1>Admins</h1>
+          </div>
+        </div>
+      </div>
+      <div class="pages" id="home">
+        <div class="charts">
+          <h1 id="heading">Reports</h1>
+          <div class="bar_container">
+            <div class="bar">
+              <h1>Monthly Orders</h1>
+              <canvas class="monthChart"></canvas>
+            </div>
+            <div class="bar_info"></div>
+            <div class="bar">
+              <h1>Monthly Income</h1>
+              <canvas class="monthlySales"></canvas>
+            </div>
+          </div>
+          <div class="bar_container">
+            <div class="bar">
+              <h1>Yearly Orders</h1>
+              <canvas class="yearChart"></canvas>
+            </div>
+            <div class="bar">
+              <h1>Yearly Income</h1>
+              <canvas class="yearlySales"></canvas>
+            </div>
+          </div>
+          <div class="info" id="yearOrders">
+            <h1 style="text-align: center; margin-bottom: 10px">Summary</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>Months</th>
+                  <th>Total Orders</th>
+                  <th>Total Sales</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var Pdfsoptions = {
+        margin: 1,
+        filename: "Reports.pdf",
+        image: { type: "jpeg", quality: 1 },
+        html2canvas: { scale: 2.5, width: 1100, dpi: 192 },
+        jsPDF: { unit: "pt", format: "a4", orientation: "portrait" },
+      };
+      function downloadPDF() {
+        var element = document.getElementById("pdf-content");
+        html2pdf(element, Pdfsoptions);
+      }
+
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          downloadPDF();
+        }, 2523);
+        setTimeout(() => {
+          window.close();
+        }, 5000);
+      });
+
+      let socket = io.connect(
+        "http://" + document.domain + ":" + location.port
+      );
+      socket.emit("admin");
+
+      socket.on("adminData", (users) => {
+        let manager, chief, waiter, worker, admins;
+        manager = chief = waiter = worker = admins = 0;
+        let t_manager = document.getElementById("t_manager"),
+          t_chief = document.getElementById("t_chief"),
+          t_workers = document.getElementById("t_workers"),
+          t_waiters = document.getElementById("t_waiters"),
+          t_admins = document.getElementById("t_admins"),
+          srno = 0;
+        for (let i in users) {
+          if (users.hasOwnProperty(i)) {
+            srno++;
+            if (users[i].role == "Manager") {
+              manager++;
+            } else if (users[i].role == "Chief") {
+              chief++;
+            } else if (users[i].role == "Waiters") {
+              waiter++;
+            } else if (users[i].role == "Workers") {
+              worker++;
+            } else if (users[i].role == "Admin") {
+              admins++;
+            }
+          }
+        }
+        // }
+        t_manager.textContent = manager;
+        t_workers.textContent = worker;
+        t_chief.textContent = chief;
+        t_waiters.textContent = waiter;
+        t_admins.textContent = admins;
+      });
+
+      let month_checker = (Month) => {
+        switch (Month) {
+          case 1:
+            return ["January", "Jan"];
+            break;
+          case 2:
+            return ["Feburary", "Feb"];
+            break;
+          case 3:
+            return ["March", "Mar"];
+            break;
+          case 4:
+            return ["April", "Apr"];
+            break;
+          case 5:
+            return ["May", "May"];
+            break;
+          case 6:
+            return ["June", "Jun"];
+            break;
+          case 7:
+            return ["July", "Jul"];
+            break;
+          case 8:
+            return ["August", "Aug"];
+            break;
+          case 9:
+            return ["September", "Sep"];
+            break;
+          case 10:
+            return ["October", "Oct"];
+            break;
+          case 11:
+            return ["November", "Nov"];
+            break;
+          case 12:
+            return ["December", "Dec"];
+            break;
+        }
+      };
+
+      let All_In_One_Chart_functions = {
+        bar: "bar",
+        line: "line",
+        pie: "pie",
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255,99,132,1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        options: {
+          scales: {
+            y: {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          },
+          legend: {
+            display: false,
+          },
+          elements: {
+            point: {
+              radius: 0,
+            },
+          },
+        },
+      };
+
+      const monthlyOrders = document
+        .querySelector(".monthChart")
+        .getContext("2d");
+      const monthlySales = document
+        .querySelector(".monthlySales")
+        .getContext("2d");
+      const yearlyOrders = document
+        .querySelector(".yearChart")
+        .getContext("2d");
+      const yearlySales = document
+        .querySelector(".yearlySales")
+        .getContext("2d");
+
+      socket.on("monthsReports", (data) => {
+        let month = parseInt(data[0].summary_date.split("-")[1]);
+
+        let chart_heading_for_month = [],
+          chart_data_for_total_orders = [],
+          chart_data_for_total_sales = [];
+
+        data.map((item) => {
+          chart_heading_for_month.push(
+            item.summary_date
+              .split(`-${month}`)
+              .join(` ${month_checker(month)[1]}`)
+          );
+          chart_data_for_total_orders.push(item.total_orders);
+          chart_data_for_total_sales.push(item.total_amount);
+        });
+        let monthly_orders = {
+          labels: chart_heading_for_month,
+          datasets: [
+            {
+              label: `${month_checker(month)[0]}`,
+              data: chart_data_for_total_orders,
+              backgroundColor: All_In_One_Chart_functions.backgroundColor, // Color of bars
+              borderColor: All_In_One_Chart_functions.borderColor, // Border color of bars
+              borderWidth: 1,
+              fill: false,
+            },
+          ],
+        };
+
+        let monthly_incomes = {
+          labels: chart_heading_for_month,
+          datasets: [
+            {
+              label: `${month_checker(month)[0]}`,
+              data: chart_data_for_total_sales,
+              backgroundColor: All_In_One_Chart_functions.backgroundColor, // Color of bars
+              borderColor: All_In_One_Chart_functions.borderColor, // Border color of bars
+              borderWidth: 1,
+              fill: false,
+            },
+          ],
+        };
+        let MonthlyOrdersChart = new Chart(monthlyOrders, {
+          type: All_In_One_Chart_functions.bar,
+          data: monthly_orders,
+          options: All_In_One_Chart_functions.options,
+        });
+
+        let MonthlyIncomeChart = new Chart(monthlySales, {
+          type: All_In_One_Chart_functions.bar,
+          data: monthly_incomes,
+          options: All_In_One_Chart_functions.options,
+        });
+
+        // Update charts on different months
+
+        socket.on("searchByDateDone", (newData) => {
+          if (newData != "") {
+            month = parseInt(newData[0].summary_date.split("-")[1]);
+            chart_heading_for_month.length = 0;
+            chart_data_for_total_orders.length = 0;
+            chart_data_for_total_sales.length = 0;
+
+            newData.map((item) => {
+              chart_heading_for_month.push(
+                item.summary_date
+                  .split(`-${month}`)
+                  .join(` ${month_checker(month)[1]}`)
+              );
+              chart_data_for_total_orders.push(item.total_orders);
+              chart_data_for_total_sales.push(item.total_amount);
+            });
+
+            let monthly_orders_new = {
+              labels: chart_heading_for_month,
+              datasets: [
+                {
+                  label: `${month_checker(month)[0]}`,
+                  data: chart_data_for_total_orders,
+                  backgroundColor: All_In_One_Chart_functions.backgroundColor, // Color of bars
+                  borderColor: All_In_One_Chart_functions.borderColor, // Border color of bars
+                  borderWidth: 1,
+                  fill: false,
+                },
+              ],
+            };
+
+            let monthly_incomes_new = {
+              labels: chart_heading_for_month,
+              datasets: [
+                {
+                  label: `${month_checker(month)[0]}`,
+                  data: chart_data_for_total_sales,
+                  backgroundColor: All_In_One_Chart_functions.backgroundColor, // Color of bars
+                  borderColor: All_In_One_Chart_functions.borderColor, // Border color of bars
+                  borderWidth: 1,
+                  fill: false,
+                },
+              ],
+            };
+
+            MonthlyOrdersChart.data = monthly_orders_new;
+            MonthlyOrdersChart.update();
+            MonthlyIncomeChart.data = monthly_incomes_new;
+            MonthlyIncomeChart.update();
+          } else {
+            // not found
+            alert("No data found");
+          }
+        });
+      });
+
+      // yearly orders data start
+      socket.on("yearlyOrders", (data) => {
+        let chart_heading_for_month_year = [],
+          chart_data_for_total_orders_month_year = [],
+          chart_data_for_total_sales_month_year = [];
+        data.map((item) => {
+          let month = parseInt(item.summary_date.split("-")[0]);
+          chart_heading_for_month_year.push(
+            item.summary_date
+              .split(`${month}-`)
+              .join(`${month_checker(month)[1]} `)
+          );
+          chart_data_for_total_orders_month_year.push(item.Total);
+          chart_data_for_total_sales_month_year.push(item.TotalAmount);
+        });
+
+        let yearly_month_data = {
+          labels: chart_heading_for_month_year,
+          datasets: [
+            {
+              label: `Yearly Orders`,
+              data: chart_data_for_total_orders_month_year,
+              backgroundColor: All_In_One_Chart_functions.backgroundColor, // Color of bars
+              borderColor: All_In_One_Chart_functions.borderColor, // Border color of bars
+              borderWidth: 1,
+              fill: false,
+            },
+          ],
+        };
+
+        let Yearly_chart = new Chart(yearlyOrders, {
+          type: All_In_One_Chart_functions.bar,
+          data: yearly_month_data,
+          options: All_In_One_Chart_functions.options,
+        });
+        let yearly_month_sales_data = {
+          labels: chart_heading_for_month_year,
+          datasets: [
+            {
+              label: `Yearly Sales`,
+              data: chart_data_for_total_sales_month_year,
+              backgroundColor: All_In_One_Chart_functions.backgroundColor, // Color of bars
+              borderColor: All_In_One_Chart_functions.borderColor, // Border color of bars
+              borderWidth: 1,
+              fill: false,
+            },
+          ],
+        };
+
+        let year_chart_total = new Chart(yearlySales, {
+          type: All_In_One_Chart_functions.bar,
+          data: yearly_month_sales_data,
+          options: All_In_One_Chart_functions.options,
+        });
+
+        console.log(data);
+        let yearOrders = document.querySelector("#yearOrders tbody");
+        data.forEach((item) => {
+          let tr = document.createElement("tr");
+          tr.innerHTML = `
+                  <tr>
+                    <td>${
+                      month_checker(
+                        parseInt(item.summary_date.split("-")[0])
+                      )[0]
+                    }</td>
+                    <td>${item.Total}</td>
+                    <td>${item.TotalAmount}</td>
+                  </tr>`;
+
+          yearOrders.appendChild(tr);
+        });
+
+        socket.on("yearlyOrdersUpdates", (newData) => {
+          chart_heading_for_month_year.length = 0;
+          chart_data_for_total_orders_month_year.length = 0;
+          chart_data_for_total_sales_month_year.length = 0;
+
+          newData.map((item) => {
+            let month = parseInt(item.summary_date.split("-")[0]);
+            chart_heading_for_month_year.push(
+              item.summary_date
+                .split(`${month}-`)
+                .join(`${month_checker(month)[1]} `)
+            );
+            chart_data_for_total_orders_month_year.push(item.Total);
+            chart_data_for_total_sales_month_year.push(item.TotalAmount);
+          });
+
+          let yearly_month_data_new = {
+            labels: chart_heading_for_month_year,
+            datasets: [
+              {
+                label: `Yearly Orders`,
+                data: chart_data_for_total_orders_month_year,
+                backgroundColor: All_In_One_Chart_functions.backgroundColor, // Color of bars
+                borderColor: All_In_One_Chart_functions.borderColor, // Border color of bars
+                borderWidth: 1,
+                fill: false,
+              },
+            ],
+          };
+
+          Yearly_chart.data = yearly_month_data_new;
+          Yearly_chart.update();
+          let yearly_month_sales_data_new = {
+            labels: chart_heading_for_month_year,
+            datasets: [
+              {
+                label: `Yearly Sales`,
+                data: chart_data_for_total_sales_month_year,
+                backgroundColor: All_In_One_Chart_functions.backgroundColor, // Color of bars
+                borderColor: All_In_One_Chart_functions.borderColor, // Border color of bars
+                borderWidth: 1,
+                fill: false,
+              },
+            ],
+          };
+          year_chart_total.data = yearly_month_sales_data_new;
+          year_chart_total.update();
+        });
+      });
+      // yearly orders data end
+    </script>
+  </body>
+</html>

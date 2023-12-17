@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Tables</title>
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body>
+    <div class="add_employee_">
+      <form>
+        <div class="employee_editor">
+          <div class="input_box">
+            <div class="inputs">
+              <input type="text" name="lasttid" value="5" required />
+              <label class="input_title">Last table</label>
+            </div>
+            <div class="inputs">
+              <input type="number" name="tableno" required />
+              <label class="input_title">No of tables to add</label>
+            </div>
+          </div>
+          <div class="buttons">
+            <button type="submit">Add tables</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      let addLogin = document.getElementById("addLogin"),
+        select_box = document.querySelector(".select_box");
+
+      let username = document.querySelector('input[name="username"]');
+      let password = document.querySelector('input[name="password"]');
+      let firstname = document.querySelector('input[name="firstname"]');
+
+      addLogin.addEventListener("input", (e) => {
+        if (addLogin.checked) {
+          select_box.style.display = "block";
+          if (firstname.value != "") {
+            username.setAttribute("required", "required");
+            password.setAttribute("required", "required");
+            username.value = password.value =
+              firstname.value.toLowerCase() + parseInt(Math.random() * 100);
+          }
+        } else {
+          select_box.style.display = "none";
+          username.value = password.value = "";
+        }
+      });
+
+      let forr = document.getElementById("for");
+      let select = document.querySelector('select[name="role"]');
+
+      select.addEventListener("input", () => {
+        forr.textContent = `Add login page for ${select.value}`;
+      });
+    </script>
+  </body>
+</html>

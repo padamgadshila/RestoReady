@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="message">
+      <h1>To view this click inspect and view it in mobile view</h1>
+    </div>
+    <div class="top_section">
+      <div class="user_action">
+        <img class="side_btn" src="./images/menus.png" />
+        <div class="cart">
+          <img src="./images/shopping-basket.png" />
+          <span>0</span>
+        </div>
+      </div>
+      <div class="logo">
+        <img src="./images/logo.png" />
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search" />
+        <img src="./images/search.png" />
+      </div>
+    </div>
+
+    <div class="menu_section">
+      <div class="nav_bar">
+        <ul class="nav_items">
+          <li class="active_tab" onclick="displayPage('breakfast','menu_list')">
+            Breakfast
+          </li>
+          <li onclick="displayPage('lunch','menu_list')">Lunch / Dinner</li>
+          <li onclick="displayPage('dessert','menu_list')">Dessert</li>
+          <li onclick="displayPage('snacks','menu_list')">Snacks</li>
+        </ul>
+      </div>
+
+      <div class="main_container">
+        <div class="menu_list" id="breakfast">
+          <div class="list"><div class="foods" data-foodname="Roti" data-fid="40">
+                <div class="food_img">
+                  <img src="./uploads/roti.png" alt="Roti">
+                </div>
+                <h1>Roti</h1>
+                <p data-price="15">15Rs/-</p>
+                
+             </div><div class="foods" data-foodname="Tea" data-fid="41">
+                <div class="food_img">
+                  <img src="./uploads/tea.png" alt="Tea">
+                </div>
+                <h1>Tea</h1>
+                <p data-price="10">10Rs/-</p>
+                
+             </div><div class="foods" data-foodname="Vadapav" data-fid="44">
+                <div class="food_img">
+                  <img src="./uploads/vadapav.png" alt="Vadapav">
+                </div>
+                <h1>Vadapav</h1>
+                <p data-price="10">10Rs/-</p>
+                
+             </div></div>
+        </div>
+        <div class="menu_list" id="lunch">
+          <div class="list"><div class="foods" data-foodname="Samosa" data-fid="38">
+                <div class="food_img">
+                  <img src="./uploads/samosa.png" alt="Samosa">
+                </div>
+                <h1>Samosa</h1>
+                <p data-price="20">20Rs/-</p>
+                
+             </div><div class="foods" data-foodname="Chicken Tandoori" data-fid="39">
+                <div class="food_img">
+                  <img src="./uploads/chicken_tandoori.png" alt="Chicken Tandoori">
+                </div>
+                <h1>Chicken Tandoori</h1>
+                <p data-price="150">150Rs/-</p>
+                
+             </div><div class="foods" data-foodname="Salmon" data-fid="46">
+                <div class="food_img">
+                  <img src="./uploads/chease_vadapav.png" alt="Salmon">
+                </div>
+                <h1>Salmon</h1>
+                <p data-price="250">250Rs/-</p>
+                
+             </div></div>
+        </div>
+        <div class="menu_list" id="dessert">
+          <div class="list"><div class="foods" data-foodname="Ice-cream " data-fid="42">
+                <div class="food_img">
+                  <img src="./uploads/ice-cream.png" alt="Ice-cream ">
+                </div>
+                <h1>Ice-cream </h1>
+                <p data-price="25">25Rs/-</p>
+                
+             </div></div>
+        </div>
+        <div class="menu_list" id="snacks">
+          <div class="list"><div class="foods" data-foodname="Cheetos" data-fid="43">
+                <div class="food_img">
+                  <img src="./uploads/cheetos.png" alt="Cheetos">
+                </div>
+                <h1>Cheetos</h1>
+                <p data-price="10">10Rs/-</p>
+                
+             </div><div class="foods" data-foodname="Burgur" data-fid="45">
+                <div class="food_img">
+                  <img src="./uploads/vecteezy_beef-burger-cutout_23522925_991.png" alt="Burgur">
+                </div>
+                <h1>Burgur</h1>
+                <p data-price="30">30Rs/-</p>
+                
+             </div><div class="foods" data-foodname="Pizza" data-fid="48">
+                <div class="food_img">
+                  <img src="./uploads/thinly-sliced-pepperoni-is-popular-pizza-topping-american-style-pizzerias-isolated-white-background-still-life.jpg" alt="Pizza">
+                </div>
+                <h1>Pizza</h1>
+                <p data-price="250">250Rs/-</p>
+                
+             </div></div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="cart_list">
+      <i class="fas fa-x"></i>
+      <form class="form">
+        <input type="text" name="tableno" hidden value="{{tid}}" />
+        <div class="inputs">
+          <input type="email" id="email" name="email" required />
+          <label for="email" class="inputs_title">Enter your email</label>
+        </div>
+        <div class="selected_items"></div>
+        <div class="button">
+          <button type="submit">Order</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="side_page">
+      <i class="fas fa-x"></i>
+      <div class="payment_content">payment_content</div>
+    </div>
+  </body>
+
+  <script src="./js/index.js"></script>
+  <script src="./js/common_functions.js"></script>
+</html>

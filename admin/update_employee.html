@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Employee</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/admin.css')}}"
+    />
+  </head>
+  <body>
+    <div class="add_employee_">
+      <form action="/UpdateEmployee" method="post">
+        <input type="number" hidden value="{{data.uid}}" required name="uid" />
+        <div class="employee_editor">
+          <div class="input_box">
+            <div class="inputs">
+              <input
+                type="text"
+                name="firstname"
+                required
+                value="{{data.fname}}"
+              />
+              <label class="input_title">First name</label>
+            </div>
+            <div class="inputs">
+              <input
+                type="text"
+                name="lastname"
+                required
+                value="{{data.lname}}"
+              />
+              <label class="input_title">Last name</label>
+            </div>
+          </div>
+          <div class="input_box">
+            <div class="inputs">
+              <input type="text" name="email" required value="{{data.email}}" />
+              <label class="input_title">Email</label>
+            </div>
+            <div class="inputs">
+              <input
+                type="text"
+                name="mobile"
+                required
+                value="{{data.mobile}}"
+              />
+              <label class="input_title">Mobile no</label>
+            </div>
+          </div>
+          <div class="input_box">
+            <div class="inputs">
+              <select name="role" required>
+                <option value=""></option>
+                {%for i in options%} {%if data.role in i%}
+                <option value="{{i}}" selected>{{i}}</option>
+                {%else%}
+                <option value="{{i}}">{{i}}</option>
+                {%endif%} {%endfor%}
+              </select>
+              <label class="input_title">Select employee role</label>
+            </div>
+            <div class="inputs">
+              <span id="for">Add login page for</span>
+              <input type="checkbox" id="addLogin" name="addLogin" />
+            </div>
+          </div>
+          <div class="select_box">
+            <div class="input_box">
+              <div class="inputs">
+                <input type="text" name="username" value="{{data.username}}" />
+                <label class="input_title">Username</label>
+              </div>
+              <div class="inputs">
+                <input type="text" name="password" value="{{data.password}}" />
+                <label class="input_title">Password</label>
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            <button type="submit">Update</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    {%if status%}
+    <script>
+      window.close();
+    </script>
+    {%endif%}
+
+    <script>
+      let addLogin = document.getElementById("addLogin"),
+        select_box = document.querySelector(".select_box");
+      let forr = document.getElementById("for");
+      let select = document.querySelector('select[name="role"]');
+
+      let username = document.querySelector('input[name="username"]');
+      let password = document.querySelector('input[name="password"]');
+      let firstname = document.querySelector('input[name="firstname"]');
+
+      if (username.value !== "-") {
+        addLogin.checked = "checked";
+        select_box.style.display = "block";
+        username.style.userSelect = password.style.userSelect = "none";
+        username.style.pointerEvents = password.style.pointerEvents = "none";
+        forr.textContent = `Add login page for ${select.value}`;
+      } else {
+        select_box.style.display = "none";
+      }
+
+      addLogin.addEventListener("click", (e) => {
+        if (addLogin.checked) {
+          select_box.style.display = "block";
+          username.setAttribute("required", "required");
+          password.setAttribute("required", "required");
+          username.value = password.value = "{{data.username}}";
+          forr.textContent = `Add login page for ${select.value}`;
+        } else {
+          select_box.style.display = "none";
+          username.removeAttribute("required", "required");
+          password.removeAttribute("required", "required");
+          username.value = password.value = "-";
+          forr.textContent = `Add login page for `;
+        }
+      });
+
+      select.addEventListener("input", () => {
+        forr.textContent = `Add login page for ${select.value}`;
+      });
+    </script>
+  </body>
+</html>

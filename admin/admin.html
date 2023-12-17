@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/admin.css" />
+    <link rel="stylesheet" href="/icons/css/all.min.css" />
+    <script src="/js/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <div class="side_navbar">
+      <div class="logo">
+        <img src="/images/logo.png" alt="logo" />
+      </div>
+      <input type="text" hidden="" id="admin" value="admin" />
+      <ul>
+        <li class="active_tab" onclick="displayPage('home','pages')">
+          <i class="fas fa-home-user"></i>
+          <span>Home</span>
+        </li>
+        <li onclick="displayPage('employee','pages')" class="">
+          <i class="fas fa-user"></i>
+          <span>Employes</span>
+        </li>
+        <li onclick="displayPage('tables','pages')" class="">
+          <i class="fas fa-chair"></i>
+          <span>Tables</span>
+        </li>
+        <li>
+          <i class="fas fa-right-from-bracket"></i>
+          <span><a href="#">Logout</a></span>
+        </li>
+      </ul>
+    </div>
+    <div class="main_content">
+      <div class="pages" id="employee" style="display: none">
+        <div class="row">
+          <h1>
+            Total Employees <span id="totalEmployee">5</span> including Admins
+          </h1>
+          <div class="filter">
+            <button>
+              <i class="fas fa-filter"></i><span>Filter : All</span>
+            </button>
+            <div class="filter_tems">
+              <ul>
+                <li class="active" onclick="displayPage('f_all','tables')">
+                  All
+                </li>
+                <li onclick="displayPage('f_chief','tables')">Chiefs</li>
+                <li onclick="displayPage('f_manager','tables')">Managers</li>
+                <li onclick="displayPage('f_waiter','tables')">Waiters</li>
+                <li onclick="displayPage('f_workers','tables')">Workers</li>
+                <li onclick="displayPage('f_admins','tables')">Admins</li>
+              </ul>
+            </div>
+          </div>
+          <div class="add_employee">
+            <button>
+              <a href="./add_employee.html" target="_blank"
+                ><i class="fas fa-plus"></i>Add employee</a
+              >
+            </button>
+          </div>
+        </div>
+        <div class="tables_container">
+          <div class="tables" id="f_all">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+                  <th>Role</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th colspan="2">Action</th>
+                </tr>
+              </thead>
+              <tbody class="tbd">
+                <tr>
+                  <td>1</td>
+                  <td>Padam Gadshila</td>
+                  <td>padamgadshila17@gmail.com</td>
+                  <td>7757069284</td>
+                  <td>Manager</td>
+                  <td>padam95</td>
+                  <td>padam95</td>
+                  <td>
+                    <a id="upp" href="/Update/22" target="_blank">Edit</a>
+                  </td>
+                  <td>
+                    <span id="deleUser" data-uid="22" onclick="deletee(this)"
+                      >Delete</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Harry Lucas</td>
+                  <td>harrylu@gmail.com</td>
+                  <td>1515151552</td>
+                  <td>Chief</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>
+                    <a id="upp" href="#" target="_blank">Edit</a>
+                  </td>
+                  <td>
+                    <span id="deleUser" data-uid="23" onclick="deletee(this)"
+                      >Delete</span
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Yash Prasad</td>
+                  <td>yashup@gmail.com</td>
+                  <td>5412365214</td>
+                  <td>Waiters</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>
+                    <a id="upp" href="#" target="_blank">Edit</a>
+                  </td>
+                  <td>
+                    <span id="deleUser" data-uid="24" onclick="deletee(this)"
+                      >Delete</span
+                    >
+                  </td>
+                </tr>
+                <tr class="admin">
+                  <td>4</td>
+                  <td>Pranit Daphale</td>
+                  <td>pranitdaphale@gmail.com</td>
+                  <td>4512354125</td>
+                  <td>Admin</td>
+                  <td>admin</td>
+                  <td>admin</td>
+                  <td>
+                    <a id="upp" href="#" target="_blank">Edit</a>
+                  </td>
+                  <td>
+                    <span id="deleUser" data-uid="25" onclick="deletee(this)"
+                      >Delete</span
+                    >
+                  </td>
+                </tr>
+                <tr class="admin">
+                  <td>5</td>
+                  <td>Youvi Rana</td>
+                  <td>youvirana@gmail.com</td>
+                  <td>5412658745</td>
+                  <td>Admin</td>
+                  <td>youvi56</td>
+                  <td>youvi56</td>
+                  <td>
+                    <a id="upp" href="#" target="_blank">Edit</a>
+                  </td>
+                  <td>
+                    <span id="deleUser" data-uid="26" onclick="deletee(this)"
+                      >Delete</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tables" id="f_manager">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+                  <th>Role</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th colspan="2">Action</th>
+                </tr>
+              </thead>
+              <tbody class="tbd">
+                <tr>
+                  <td>1</td>
+                  <td>Padam Gadshila</td>
+                  <td>padamgadshila17@gmail.com</td>
+                  <td>7757069284</td>
+                  <td>Manager</td>
+                  <td>padam95</td>
+                  <td>padam95</td>
+                  <td>
+                    <a id="upp" href="#" target="_blank">Edit</a>
+                  </td>
+                  <td>
+                    <span id="deleUser" data-uid="22" onclick="deletee(this)"
+                      >Delete</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tables" id="f_chief">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+                  <th>Role</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th colspan="2">Action</th>
+                </tr>
+              </thead>
+              <tbody class="tbd">
+                <tr>
+                  <td>2</td>
+                  <td>Harry Lucas</td>
+                  <td>harrylu@gmail.com</td>
+                  <td>1515151552</td>
+                  <td>Chief</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>
+                    <a id="upp" href="#" target="_blank">Edit</a>
+                  </td>
+                  <td>
+                    <span id="deleUser" data-uid="23" onclick="deletee(this)"
+                      >Delete</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tables" id="f_waiter">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+                  <th>Role</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th colspan="2">Action</th>
+                </tr>
+              </thead>
+              <tbody class="tbd">
+                <tr>
+                  <td>3</td>
+                  <td>Yash Prasad</td>
+                  <td>yashup@gmail.com</td>
+                  <td>5412365214</td>
+                  <td>Waiters</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>
+                    <a id="upp" href="#" target="_blank">Edit</a>
+                  </td>
+                  <td>
+                    <span id="deleUser" data-uid="24" onclick="deletee(this)"
+                      >Delete</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tables" id="f_workers">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+                  <th>Role</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th colspan="2">Action</th>
+                </tr>
+              </thead>
+              <tbody class="tbd"></tbody>
+            </table>
+          </div>
+          <div class="tables" id="f_admins">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+                  <th>Role</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                  <th colspan="2">Action</th>
+                </tr>
+              </thead>
+              <tbody class="tbd">
+                <tr class="admin">
+                  <td>4</td>
+                  <td>Pranit Daphale</td>
+                  <td>pranitdaphale@gmail.com</td>
+                  <td>4512354125</td>
+                  <td>Admin</td>
+                  <td>admin</td>
+                  <td>admin</td>
+                  <td>
+                    <a id="upp" href="#" target="_blank">Edit</a>
+                  </td>
+                  <td>
+                    <span id="deleUser" data-uid="25" onclick="deletee(this)"
+                      >Delete</span
+                    >
+                  </td>
+                </tr>
+                <tr class="admin">
+                  <td>5</td>
+                  <td>Youvi Rana</td>
+                  <td>youvirana@gmail.com</td>
+                  <td>5412658745</td>
+                  <td>Admin</td>
+                  <td>youvi56</td>
+                  <td>youvi56</td>
+                  <td>
+                    <a id="upp" href="#" target="_blank">Edit</a>
+                  </td>
+                  <td>
+                    <span id="deleUser" data-uid="26" onclick="deletee(this)"
+                      >Delete</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="summary">
+          <div class="totals">
+            <i class="fas fa-user"></i>
+            <div class="total_info">
+              <span id="t_manager">1</span>
+              <h1>Managers</h1>
+            </div>
+          </div>
+          <div class="totals">
+            <i class="fas fa-user"></i>
+            <div class="total_info">
+              <span id="t_chief">1</span>
+              <h1>Chiefs</h1>
+            </div>
+          </div>
+          <div class="totals">
+            <i class="fas fa-user"></i>
+            <div class="total_info">
+              <span id="t_waiters">1</span>
+              <h1>Waiters</h1>
+            </div>
+          </div>
+          <div class="totals">
+            <i class="fas fa-user"></i>
+            <div class="total_info">
+              <span id="t_workers">0</span>
+              <h1>Workers</h1>
+            </div>
+          </div>
+          <div class="totals">
+            <i class="fas fa-user"></i>
+            <div class="total_info">
+              <span id="t_admins">2</span>
+              <h1>Admins</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pages" id="home" style="display: block">
+        <a href="#  " target="_blank" class="fas fa-download"></a>
+
+        <div class="orderPage">
+          <h1>Orders</h1>
+          <div class="suborder">
+            <i class="fas fa-clipboard-list"></i>
+            <span id="totalOrderToady">7</span>
+            <h2>Today</h2>
+          </div>
+          <div class="suborder">
+            <i class="fas fa-clipboard-list"></i>
+            <span id="totalOrderMonth">7</span>
+            <h2>Month</h2>
+          </div>
+          <div class="suborder">
+            <i class="fas fa-clipboard-list"></i>
+            <span id="totalOrderYear">160</span>
+            <h2>Year</h2>
+          </div>
+        </div>
+        <div class="charts">
+          <h1 id="heading">Summary</h1>
+          <div class="inputs" style="width: 500px">
+            <select id="monthSelector" name="month" required="">
+              <option></option>
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+            <label for="monthSelector" class="input_title"
+              >Select a Month:</label
+            >
+          </div>
+          <div class="bar_container">
+            <div class="bar">
+              <h1>Monthly Orders</h1>
+              <canvas
+                class="monthChart"
+                width="473"
+                height="236"
+                style="
+                  display: block;
+                  box-sizing: border-box;
+                  height: 189px;
+                  width: 378px;
+                "
+              ></canvas>
+            </div>
+            <div class="bar">
+              <h1>Monthly Income</h1>
+              <canvas
+                class="monthlySales"
+                width="473"
+                height="236"
+                style="
+                  display: block;
+                  box-sizing: border-box;
+                  height: 189px;
+                  width: 378px;
+                "
+              ></canvas>
+            </div>
+          </div>
+          <div class="bar_container">
+            <div class="bar">
+              <h1>Yearly Orders</h1>
+              <canvas
+                class="yearChart"
+                width="473"
+                height="236"
+                style="
+                  display: block;
+                  box-sizing: border-box;
+                  height: 189px;
+                  width: 378px;
+                "
+              ></canvas>
+            </div>
+            <div class="bar">
+              <h1>Yearly Income</h1>
+              <canvas
+                class="yearlySales"
+                width="473"
+                height="236"
+                style="
+                  display: block;
+                  box-sizing: border-box;
+                  height: 189px;
+                  width: 378px;
+                "
+              ></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="copyright" style="text-align: center">
+          &#169; 2021 Restoready. Developed By Padam and Pranit. All rights
+          reserved.
+        </div>
+      </div>
+
+      <div class="pages" id="tables" style="display: none">
+        <div class="row">
+          <h1>Total Tables <span id="totalTABLES">15</span></h1>
+          <div class="add_employee">
+            <button>
+              <a href="./add_tables.html" target="_blank"
+                ><i class="fas fa-plus"></i>Add Table</a
+              >
+            </button>
+          </div>
+        </div>
+        <div class="tables_container" id="adminTable">
+          <div class="box undefined">
+            <span>T1</span>
+          </div>
+          <div class="box bk">
+            <span>T2</span>
+          </div>
+          <div class="box undefined">
+            <span>T3</span>
+          </div>
+          <div class="box undefined">
+            <span>T4</span>
+          </div>
+          <div class="box bk">
+            <span>T5</span>
+          </div>
+          <div class="box undefined">
+            <span>T6</span>
+          </div>
+          <div class="box undefined">
+            <span>T7</span>
+          </div>
+          <div class="box undefined">
+            <span>T8</span>
+          </div>
+          <div class="box undefined">
+            <span>T9</span>
+          </div>
+          <div class="box undefined">
+            <span>T10</span>
+          </div>
+          <div class="box undefined">
+            <span>T11</span>
+          </div>
+          <div class="box undefined">
+            <span>T12</span>
+          </div>
+          <div class="box undefined">
+            <span>T13</span>
+          </div>
+          <div class="box undefined">
+            <span>T14</span>
+          </div>
+          <div class="box undefined">
+            <span>T15</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/admin.js"></script>
+    <script src="/js/common_functions.js"></script>
+  </body>
+</html>
